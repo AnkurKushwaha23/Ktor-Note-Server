@@ -9,6 +9,7 @@ import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.net.URI
 
 object DatabaseFactory {
 
@@ -21,6 +22,16 @@ object DatabaseFactory {
     }
 
     private fun hikari(): HikariDataSource {
+//        val uri = URI(System.getenv("PSDB_URL"))
+//        val username = uri.userInfo.split(":")[0]
+//        val password = uri.userInfo.split(":")[1]
+//
+//        val database = uri.path.substring(1)
+//
+//        val jdbcURL =
+//            "jdbc:postgresql://${uri.host}:${uri.port}/$database?sslmode=require&user=$username&password=$password"
+
+
         val config = HikariConfig().apply {
             driverClassName = System.getenv("JDBC_DRIVER") // In production, use environment variables
             jdbcUrl = System.getenv("DB_URL") // In production, use environment variables
